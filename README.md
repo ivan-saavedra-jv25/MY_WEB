@@ -32,6 +32,8 @@ Los iconos se indican por id del sprite en `index.html` (por ejemplo `i-mail`).
 ```
 index.html              Estructura y contenido
 css/styles.css          Tokens (:root), componentes, responsive, reduced-motion
+scripts/fetch-repos.mjs  Genera data/repos-list.json en el CI
+.github/workflows/      Despliegue a GitHub Pages
 js/main.js              Tema claro/oscuro, menú móvil, enlace activo, reveal, volver arriba
 assets/images/logo.svg  Logo / favicon
 assets/IvanSaavedra-CV.pdf  CV descargable
@@ -47,7 +49,12 @@ assets/certificados/    Miniaturas de certificados (el original está en Drive)
 El certificado completo vive en Drive: al hacer clic se abre en un visor modal (iframe de `drive.google.com/file/d/<driveId>/preview`, cierra con Esc, la X o clic fuera) con un botón "Abrir en Drive"; Ctrl/Cmd+clic lo abre directo en Drive. El enlace es `drive.google.com/file/d/<driveId>/view` (el archivo debe estar compartido como "cualquier persona con el enlace"). La miniatura es una imagen pequeña local en `assets/certificados/<driveId>.webp`. Para agregar un certificado: copia el ID de su enlace de Drive a `data/education.json` y guarda su miniatura con ese nombre (se puede obtener de `https://drive.google.com/thumbnail?id=<driveId>&sz=w1000`; Drive limita las peticiones seguidas, así que descárgalas de una en una).
 
 ## Repositorios de GitHub
-La lista en Proyectos se carga en el navegador desde la API pública de GitHub (sin token, límite de 60 consultas/hora por IP; se guarda en caché de sesión 1 h). Las cuentas se definen en `data/repos.json`. Se excluyen los forks. Si la API falla, se muestra un mensaje con los perfiles enlazados. Las descripciones y lenguajes son los de GitHub: agregar una descripción al repo la mejora en el sitio.
+Las cuentas se definen en `data/repos.json` (también `excludeForks` y `pageSize`).
+
+- **En producción (CI/CD):** el workflow `.github/workflows/static.yml` ejecuta `scripts/fetch-repos.mjs` antes de publicar y genera `data/repos-list.json` (archivo ignorado por git). Corre en cada push a `main`, a diario a las 06:00 UTC y a mano desde la pestaña Actions. Usa el `GITHUB_TOKEN` del propio workflow, así que no hay límite práctico de consultas ni secretos que configurar.
+- **Respaldo:** si ese archivo no existe (por ejemplo, al servir en local) o el paso falla, el navegador consulta la API pública de GitHub (60 consultas/hora por IP, caché de sesión de 1 h).
+- **Local:** `node scripts/fetch-repos.mjs` genera el archivo para probar.
+- Se excluyen los forks. Las descripciones y lenguajes son los de GitHub: agregar una descripción al repo la mejora en el sitio.
 
 ## Datos pendientes (no figuran en el CV, por eso no se incluyeron)
 - Foto profesional (el hero usa una composición gráfica en CSS).

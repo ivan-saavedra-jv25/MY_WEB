@@ -6,6 +6,10 @@ on:
   push:
     branches: ["main"]
 
+  # Refresca la lista de repositorios una vez al día (06:00 UTC)
+  schedule:
+    - cron: "0 6 * * *"
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -31,6 +35,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Fetch GitHub repositories
+        # Si falla, el sitio publica igual y el navegador consulta la API como respaldo
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/fetch-repos.mjs
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

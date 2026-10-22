@@ -237,6 +237,18 @@ async function fetchUserRepos(user) {
   return response.json();
 }
 
+async function loadBuiltRepos(config) {
+  try {
+    const response = await fetch('data/repos-list.json');
+    if (!response.ok) return null;
+    const built = await response.json();
+    const sameConfig = JSON.stringify([built.users, built.excludeForks]) === JSON.stringify([config.users, config.excludeForks]);
+    return sameConfig && Array.isArray(built.repos) ? built : null;
+  } catch {
+    return null;
+  }
+}
+
 async function loadRepos(config) {
   const cacheId = JSON.stringify([config.users, config.excludeForks]);
   try {
@@ -285,12 +297,18 @@ async function renderRepos(config) {
       index ? (index === config.users.length - 1 ? ' y ' : ', ') : '',
       el('a', { href: `https://github.com/${user}`, text: user, ...externalProps(true) }),
     ]);
-    subtitle.replaceChildren('Lista obtenida en vivo desde ', ...links, config.excludeForks ? '. No incluye forks.' : '.');
+    subtitle.replaceChildren('Lista obtenida desde ', ...links, config.excludeForks ? '. No incluye forks.' : '.');
   }
 
   let repos;
+  const built = await loadBuiltRepos(config);
+  if (built) {
+    repos = built.repos;
+    const updated = new Date(built.generatedAt).toLocaleDateString('es-CL', { day: 'numeric', month: 'short', year: 'numeric' });
+    subtitle?.append(` Actualizada el ${updated}.`);
+  }
   try {
-    repos = await loadRepos(config);
+    repos ||= await loadRepos(config);
   } catch (error) {
     console.error(error);
     status.textContent = 'No se pudo cargar la lista desde GitHub en este momento. Puedes verla directamente en los perfiles enlazados arriba.';
