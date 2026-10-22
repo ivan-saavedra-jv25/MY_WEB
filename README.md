@@ -20,7 +20,7 @@ Cada área tiene su propio JSON; para cambiar un listado, edita solo ese archivo
 | `stack.json` | Stack tecnológico por grupos |
 | `projects.json` | Proyectos destacados y secundarios |
 | `experience.json` | Línea de tiempo de experiencia |
-| `education.json` | Título y certificados (se ordenan por `date`, más reciente primero) |
+| `education.json` | Título y certificados (se ordenan por `date`; cada uno referencia su archivo de Google Drive con `driveId`) |
 | `contact.json` | Lista de contacto y enlaces del hero |
 | `repos.json` | Cuentas de GitHub, tamaño de página y exclusión de forks |
 
@@ -33,13 +33,15 @@ css/styles.css          Tokens (:root), componentes, responsive, reduced-motion
 js/main.js              Tema claro/oscuro, menú móvil, enlace activo, reveal, volver arriba
 assets/images/logo.svg  Logo / favicon
 assets/IvanSaavedra-CV.pdf  CV descargable
-assets/certificados/    9 certificados (webp de EDteam, PDF de Platzi)
 ```
 
 ## Personalizar
 - Colores, radios, espaciados y tipografía: variables en `:root` de `css/styles.css` (tema claro en `:root[data-theme="light"]`).
 - Contenido: editar las secciones en `index.html`. Todo el texto proviene del CV.
 - Para actualizar el CV descargable, reemplaza `assets/IvanSaavedra-CV.pdf` manteniendo el nombre.
+
+## Certificados en Google Drive
+Los certificados no están en el repo: el enlace abre `drive.google.com/file/d/<driveId>/view` y la miniatura usa `drive.google.com/thumbnail?id=<driveId>`. Los archivos deben estar compartidos como "cualquier persona con el enlace". Drive limita las miniaturas (error 429) si se piden muchas seguidas; en ese caso se muestra una tarjeta de respaldo con el enlace al certificado. Para agregar uno, copia el ID de su enlace de Drive a `education.json`.
 
 ## Repositorios de GitHub
 La lista en Proyectos se carga en el navegador desde la API pública de GitHub (sin token, límite de 60 consultas/hora por IP; se guarda en caché de sesión 1 h). Las cuentas se definen en `data/repos.json`. Se excluyen los forks. Si la API falla, se muestra un mensaje con los perfiles enlazados. Las descripciones y lenguajes son los de GitHub: agregar una descripción al repo la mejora en el sitio.

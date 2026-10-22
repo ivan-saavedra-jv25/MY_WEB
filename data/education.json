@@ -1,14 +1,101 @@
 {
-  "degree": { "icon": "i-cap", "title": "Ingeniería en Informática", "institution": "Duoc UC", "year": 2019 },
+  "degree": {
+    "icon": "i-cap",
+    "title": "Ingeniería en Informática",
+    "institution": "Duoc UC",
+    "year": 2019
+  },
   "certificates": [
-    { "title": "Curso de Java Spring", "issuer": "Platzi", "date": "2026-10-22", "hours": 11, "file": "assets/certificados/platzi-java-spring.pdf", "preview": "assets/certificados/platzi-java-spring.webp", "type": "PDF", "width": 1210, "height": 935 },
-    { "title": "Curso de Angular: Componentes y Servicios", "issuer": "Platzi", "date": "2026-09-29", "hours": 13, "file": "assets/certificados/platzi-angular-componentes-servicios.pdf", "preview": "assets/certificados/platzi-angular-componentes-servicios.webp", "type": "PDF", "width": 1210, "height": 935 },
-    { "title": "Curso de Git y GitHub", "issuer": "Platzi", "date": "2026-09-28", "hours": 24, "file": "assets/certificados/platzi-git-github.pdf", "preview": "assets/certificados/platzi-git-github.webp", "type": "PDF", "width": 1210, "height": 935 },
-    { "title": "Devsecops con IA", "issuer": "EDteam", "date": "2026-04-16", "hours": 4, "file": "assets/certificados/edteam-devsecops-ia.webp", "preview": "assets/certificados/edteam-devsecops-ia.webp", "type": "imagen", "width": 1400, "height": 1061 },
-    { "title": "CI/CD con CircleCI y Jenkins", "issuer": "EDteam", "date": "2026-04-13", "hours": 7, "file": "assets/certificados/edteam-cicd-circleci-jenkins.webp", "preview": "assets/certificados/edteam-cicd-circleci-jenkins.webp", "type": "imagen", "width": 1400, "height": 1061 },
-    { "title": "Fundamentos de AWS 2023", "issuer": "EDteam", "date": "2026-03-30", "hours": 7, "file": "assets/certificados/edteam-aws.webp", "preview": "assets/certificados/edteam-aws.webp", "type": "imagen", "width": 1400, "height": 1061 },
-    { "title": "React desde cero", "issuer": "EDteam", "date": "2025-09-04", "hours": 11, "file": "assets/certificados/edteam-react.webp", "preview": "assets/certificados/edteam-react.webp", "type": "imagen", "width": 1400, "height": 1061 },
-    { "title": "CI/CD con Gitlab", "issuer": "EDteam", "date": "2025-08-20", "hours": 3, "file": "assets/certificados/edteam-cicd-gitlab.webp", "preview": "assets/certificados/edteam-cicd-gitlab.webp", "type": "imagen", "width": 1400, "height": 1061 },
-    { "title": "Introducción a DevOps", "issuer": "EDteam", "date": "2025-08-19", "hours": 3, "file": "assets/certificados/edteam-intro-devops.webp", "preview": "assets/certificados/edteam-intro-devops.webp", "type": "imagen", "width": 1400, "height": 1061 }
-  ]
+    {
+      "title": "Curso de Java Spring",
+      "issuer": "Platzi",
+      "date": "2026-10-22",
+      "hours": 11,
+      "type": "PDF",
+      "width": 1000,
+      "height": 758,
+      "driveId": "1DxSfgaEDFRFAvphuk3dksYUn8MhhuRS9"
+    },
+    {
+      "title": "Curso de Angular: Componentes y Servicios",
+      "issuer": "Platzi",
+      "date": "2026-09-29",
+      "hours": 13,
+      "type": "PDF",
+      "width": 1000,
+      "height": 758,
+      "driveId": "1XoocxCkMQgdCeCR14vhfJxWYYt8Fkv9S"
+    },
+    {
+      "title": "Curso de Git y GitHub",
+      "issuer": "Platzi",
+      "date": "2026-09-28",
+      "hours": 24,
+      "type": "PDF",
+      "width": 1000,
+      "height": 758,
+      "driveId": "1A4SlDk41FzJ76bMG95bW3mYqB0crtR6h"
+    },
+    {
+      "title": "Devsecops con IA",
+      "issuer": "EDteam",
+      "date": "2026-04-16",
+      "hours": 4,
+      "type": "imagen",
+      "width": 1000,
+      "height": 758,
+      "driveId": "1tNCWWvVBteuD6hca-0ctaqxuIU2D28u3"
+    },
+    {
+      "title": "CI/CD con CircleCI y Jenkins",
+      "issuer": "EDteam",
+      "date": "2026-04-13",
+      "hours": 7,
+      "type": "imagen",
+      "width": 1000,
+      "height": 758,
+      "driveId": "1YSptbg-23IIYTcDJgozBc70ISeiCREyH"
+    },
+    {
+      "title": "Fundamentos de AWS 2023",
+      "issuer": "EDteam",
+      "date": "2026-03-30",
+      "hours": 7,
+      "type": "imagen",
+      "width": 1000,
+      "height": 758,
+      "driveId": "1jF1dh_OLrGlL5FbdWRVbzdACBPbu9Y5O"
+    },
+    {
+      "title": "React desde cero",
+      "issuer": "EDteam",
+      "date": "2025-09-04",
+      "hours": 11,
+      "type": "imagen",
+      "width": 1000,
+      "height": 758,
+      "driveId": "1CkRuPtglI6vasy8cAUaWeJitrxoW9Iw4"
+    },
+    {
+      "title": "CI/CD con Gitlab",
+      "issuer": "EDteam",
+      "date": "2025-08-20",
+      "hours": 3,
+      "type": "imagen",
+      "width": 1000,
+      "height": 758,
+      "driveId": "1LUbU1xlzqJZpEIRyzPL_hKaZ15KWa7ba"
+    },
+    {
+      "title": "Introducción a DevOps",
+      "issuer": "EDteam",
+      "date": "2025-08-19",
+      "hours": 3,
+      "type": "imagen",
+      "width": 1000,
+      "height": 758,
+      "driveId": "1NB3NA8ckQQv_Z92vpZslhjb3YibQLTCD"
+    }
+  ],
+  "folder": "https://drive.google.com/drive/folders/1Oh3Rz_JDmoEELFbj0eZCg0OU5oI8jSLP"
 }

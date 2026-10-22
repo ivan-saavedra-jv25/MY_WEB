@@ -134,26 +134,46 @@ function renderEducation(data) {
   );
 
   const certificates = [...data.certificates].sort((a, b) => b.date.localeCompare(a.date));
-  mount('cert-grid', ...certificates.map((cert) => {
+  mount('cert-grid', ...certificates.map((cert, index) => {
     const date = formatDate(cert.date);
+    const id = encodeURIComponent(cert.driveId);
+    const thumbUrl = `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+    const image = el('img', {
+      src: thumbUrl,
+      alt: `Certificado ${cert.issuer}: ${cert.title}, ${date}`,
+      loading: 'lazy',
+      width: cert.width,
+      height: cert.height,
+    });
+    const link = el('a', {
+      class: 'cert-thumb',
+      href: `https://drive.google.com/file/d/${id}/view`,
+      target: '_blank',
+      rel: 'noopener',
+      'aria-label': `Abrir certificado ${cert.title} (${cert.type}, pestaña nueva)`,
+    }, image);
+
+    // Drive limita las miniaturas (429): un reintento escalonado y, si falla, una tarjeta de respaldo.
+    let retried = false;
+    image.addEventListener('error', () => {
+      if (!retried) {
+        retried = true;
+        setTimeout(() => { image.src = `${thumbUrl}&retry=1`; }, 1500 + index * 700);
+        return;
+      }
+      link.classList.add('cert-thumb-fallback');
+      link.replaceChildren(el('span', { text: cert.issuer }), el('small', { text: 'Ver certificado' }));
+    });
+
     return el('li', { class: 'cert' },
-      el('a', {
-        class: 'cert-thumb',
-        href: cert.file,
-        target: '_blank',
-        rel: 'noopener',
-        'aria-label': `Abrir certificado ${cert.title} (${cert.type}, pestaña nueva)`,
-      }, el('img', {
-        src: cert.preview,
-        alt: `Certificado ${cert.issuer}: ${cert.title}, ${date}`,
-        loading: 'lazy',
-        width: cert.width,
-        height: cert.height,
-      })),
+      link,
       el('h3', { text: cert.title }),
       el('p', { text: `${cert.issuer} · ${date} · ${cert.hours} h` }),
     );
   }));
+  if (data.folder) {
+    document.getElementById('cert-folder')?.setAttribute('href', data.folder);
+  }
 }
 
 function renderContact(data) {

@@ -316,6 +316,14 @@ section { padding-block: var(--space-3); }
   transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
 .cert-thumb:hover { transform: translateY(-3px); border-color: var(--border-strong); box-shadow: var(--glow); }
+.cert-thumb-fallback {
+  display: grid; place-content: center; justify-items: center; gap: 0.3rem;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.14), rgba(59, 130, 246, 0.2)), var(--surface-solid);
+}
+.cert-thumb-fallback:hover { text-decoration: none; }
+.cert-thumb-fallback span { font-size: 1.5rem; font-weight: 800; color: var(--text); }
+.cert-thumb-fallback small { color: var(--accent); font-size: 0.85rem; }
+.cert-more { margin-top: var(--space-3); font-size: 0.9rem; }
 .cert-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-2); }
