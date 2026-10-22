@@ -149,7 +149,9 @@ function renderEducation(data) {
       href: `https://drive.google.com/file/d/${id}/view`,
       target: '_blank',
       rel: 'noopener',
-      'aria-label': `Abrir certificado ${cert.title} (${cert.type}, pestaña nueva)`,
+      'data-viewer': id,
+      'data-title': `${cert.title} · ${cert.issuer}`,
+      'aria-label': `Ver certificado ${cert.title} (${cert.type})`,
     }, image);
 
     // Si falta la miniatura local, queda una tarjeta con el enlace a Drive.
@@ -405,6 +407,38 @@ function initReveal() {
   items.forEach((item) => observer.observe(item));
 }
 
+function initViewer() {
+  const dialog = document.getElementById('viewer');
+  const frame = document.getElementById('viewer-frame');
+  const title = document.getElementById('viewer-title');
+  const openLink = document.getElementById('viewer-open');
+  const loading = document.getElementById('viewer-loading');
+  if (!dialog || !frame || typeof dialog.showModal !== 'function') return;
+
+  frame.addEventListener('load', () => {
+    if (frame.getAttribute('src')) loading.hidden = true;
+  });
+
+  // Los enlaces conservan su href a Drive: con Ctrl/Cmd/Shift o sin soporte se abren como enlace normal.
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[data-viewer]');
+    if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return;
+    event.preventDefault();
+    const id = link.dataset.viewer;
+    title.textContent = link.dataset.title;
+    openLink.href = link.href;
+    loading.hidden = false;
+    frame.src = `https://drive.google.com/file/d/${id}/preview`;
+    dialog.showModal();
+  });
+
+  document.getElementById('viewer-close')?.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener('close', () => frame.removeAttribute('src'));
+}
+
 function initBackToTop() {
   document.getElementById('back-to-top')?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -420,6 +454,7 @@ initTheme();
 initMobileMenu();
 initActiveLinks();
 initReveal();
+initViewer();
 initBackToTop();
 initYear();
 initContent();

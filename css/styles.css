@@ -260,7 +260,7 @@ section { padding-block: var(--space-3); }
 .more { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.9rem; }
 
 /* Repositorios de GitHub */
-.repos { margin-top: var(--space-4); }
+.repos { margin-top: 0; }
 .repos-head { margin-bottom: var(--space-2); }
 .repos-sub { color: var(--text-muted); font-size: 0.9rem; margin-top: -0.5rem; }
 .repo-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: var(--space-2); }
@@ -323,6 +323,22 @@ section { padding-block: var(--space-3); }
 .cert-thumb-fallback:hover { text-decoration: none; }
 .cert-thumb-fallback span { font-size: 1.5rem; font-weight: 800; color: var(--text); }
 .cert-thumb-fallback small { color: var(--accent); font-size: 0.85rem; }
+/* Visor modal (certificados) */
+body:has(dialog[open]) { overflow: hidden; }
+.viewer {
+  width: min(96vw, 1000px); height: min(90vh, 820px); max-width: none; max-height: none;
+  padding: 0; margin: auto; overflow: hidden;
+  color: var(--text); background: var(--surface-solid);
+  border: 1px solid var(--border-strong); border-radius: var(--radius); box-shadow: var(--shadow), var(--glow);
+}
+.viewer[open] { display: flex; flex-direction: column; }
+.viewer::backdrop { background: rgba(2, 8, 20, 0.78); backdrop-filter: blur(4px); }
+.viewer-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); }
+.viewer-title { flex: 1; margin: 0; font-size: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.viewer-body { position: relative; flex: 1; min-height: 0; background: #fff; }
+.viewer-body iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.viewer-loading { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: #44546f; }
+
 .cert-more { margin-top: var(--space-3); font-size: 0.9rem; }
 .cert-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 

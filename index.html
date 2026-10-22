@@ -54,9 +54,10 @@
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#sobre-mi">Sobre mí</a></li>
           <li><a href="#stack">Stack</a></li>
+          <li><a href="#formacion">Formación</a></li>
           <li><a href="#proyectos">Proyectos</a></li>
           <li><a href="#experiencia">Experiencia</a></li>
-          <li><a href="#formacion">Formación</a></li>
+          <li><a href="#repositorios">Repositorios</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
@@ -146,6 +147,16 @@
       </article>
     </section>
 
+    <!-- FORMACION -->
+    <section class="container" id="formacion" aria-labelledby="t-form">
+      <article class="card glass reveal">
+        <h2 class="card-title" id="t-form"><span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg></span> Estudios, certificaciones y cursos</h2>
+        <div class="degree" id="degree"></div>
+        <ul class="cert-grid" id="cert-grid"></ul>
+        <p class="cert-more"><a id="cert-folder" href="https://drive.google.com/drive/folders/1Oh3Rz_JDmoEELFbj0eZCg0OU5oI8jSLP" target="_blank" rel="noopener noreferrer">Ver carpeta de certificados en Google Drive</a></p>
+      </article>
+    </section>
+
     <!-- PROYECTOS -->
     <section class="container" id="proyectos" aria-labelledby="t-proy">
       <div class="section-head reveal">
@@ -154,17 +165,6 @@
       <div class="cards-3" id="projects-featured"></div>
       <div class="cards-2" id="projects-secondary"></div>
 
-      <div class="repos reveal" id="repos">
-        <div class="section-head repos-head">
-          <h3 class="card-title" id="t-repos"><span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></span> Repositorios en GitHub</h3>
-          <p class="repos-sub" id="repos-sub">Lista obtenida en vivo desde GitHub.</p>
-        </div>
-        <div class="repo-filters" id="repo-filters" role="group" aria-label="Filtrar repositorios por lenguaje" hidden></div>
-        <p class="repos-status" id="repos-status" role="status">Cargando repositorios…</p>
-        <ul class="repo-grid" id="repo-grid" aria-labelledby="t-repos"></ul>
-        <button class="btn btn-outline btn-sm" id="repos-more" type="button" hidden>Ver más</button>
-        
-      </div>
     </section>
 
     <!-- EXPERIENCIA -->
@@ -175,14 +175,19 @@
       </article>
     </section>
 
-    <!-- FORMACION -->
-    <section class="container" id="formacion" aria-labelledby="t-form">
-      <article class="card glass reveal">
-        <h2 class="card-title" id="t-form"><span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg></span> Estudios, certificaciones y cursos</h2>
-        <div class="degree" id="degree"></div>
-        <ul class="cert-grid" id="cert-grid"></ul>
-        <p class="cert-more"><a id="cert-folder" href="https://drive.google.com/drive/folders/1Oh3Rz_JDmoEELFbj0eZCg0OU5oI8jSLP" target="_blank" rel="noopener noreferrer">Ver carpeta de certificados en Google Drive</a></p>
-      </article>
+    <!-- REPOSITORIOS -->
+    <section class="container" id="repositorios" aria-labelledby="t-repos">
+      <div class="repos reveal" id="repos">
+        <div class="section-head repos-head">
+          <h2 class="card-title" id="t-repos"><span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></span> Repositorios en GitHub</h2>
+          <p class="repos-sub" id="repos-sub">Lista obtenida en vivo desde GitHub.</p>
+        </div>
+        <div class="repo-filters" id="repo-filters" role="group" aria-label="Filtrar repositorios por lenguaje" hidden></div>
+        <p class="repos-status" id="repos-status" role="status">Cargando repositorios…</p>
+        <ul class="repo-grid" id="repo-grid" aria-labelledby="t-repos"></ul>
+        <button class="btn btn-outline btn-sm" id="repos-more" type="button" hidden>Ver más</button>
+        
+      </div>
     </section>
 
     <!-- CONTACTO -->
@@ -205,5 +210,17 @@
       <button class="icon-btn" id="back-to-top" type="button" aria-label="Volver al inicio de la página"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></button>
     </div>
   </footer>
+
+  <dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
+    <div class="viewer-bar">
+      <h2 id="viewer-title" class="viewer-title"></h2>
+      <a class="btn btn-outline btn-sm" id="viewer-open" href="#" target="_blank" rel="noopener noreferrer">Abrir en Drive</a>
+      <button class="icon-btn" id="viewer-close" type="button" aria-label="Cerrar visor"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="viewer-body">
+      <p class="viewer-loading" id="viewer-loading">Cargando documento…</p>
+      <iframe id="viewer-frame" title="Vista del certificado" allow="fullscreen"></iframe>
+    </div>
+  </dialog>
 </body>
 </html>
