@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "title": "Aplicaciones web y backend", "text": "Diseño e implementación con Laravel, PHP, Java/Spring Boot, Python, NestJS y React." },
+    { "title": "Plataformas empresariales", "text": "ERP, LMS y herramientas internas de gestión." },
+    { "title": "Automatización e integración", "text": "Procesos con Python y cron jobs; integración de servicios con NestJS y FastAPI." },
+    { "title": "Calidad y buenas prácticas", "text": "Análisis estático con SonarQube, estándares de desarrollo y mantenibilidad." },
+    { "title": "Coordinación y metodologías ágiles", "text": "Scrum y Kanban; coordinación con stakeholders y equipos técnicos." }
+  ]
+}

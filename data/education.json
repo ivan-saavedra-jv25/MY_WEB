@@ -1,0 +1,14 @@
+{
+  "degree": { "icon": "i-cap", "title": "Ingeniería en Informática", "institution": "Duoc UC", "year": 2019 },
+  "certificates": [
+    { "title": "Curso de Java Spring", "issuer": "Platzi", "date": "2026-10-22", "hours": 11, "file": "assets/certificados/platzi-java-spring.pdf", "preview": "assets/certificados/platzi-java-spring.webp", "type": "PDF", "width": 1210, "height": 935 },
+    { "title": "Curso de Angular: Componentes y Servicios", "issuer": "Platzi", "date": "2026-09-29", "hours": 13, "file": "assets/certificados/platzi-angular-componentes-servicios.pdf", "preview": "assets/certificados/platzi-angular-componentes-servicios.webp", "type": "PDF", "width": 1210, "height": 935 },
+    { "title": "Curso de Git y GitHub", "issuer": "Platzi", "date": "2026-09-28", "hours": 24, "file": "assets/certificados/platzi-git-github.pdf", "preview": "assets/certificados/platzi-git-github.webp", "type": "PDF", "width": 1210, "height": 935 },
+    { "title": "Devsecops con IA", "issuer": "EDteam", "date": "2026-04-16", "hours": 4, "file": "assets/certificados/edteam-devsecops-ia.webp", "preview": "assets/certificados/edteam-devsecops-ia.webp", "type": "imagen", "width": 1400, "height": 1061 },
+    { "title": "CI/CD con CircleCI y Jenkins", "issuer": "EDteam", "date": "2026-04-13", "hours": 7, "file": "assets/certificados/edteam-cicd-circleci-jenkins.webp", "preview": "assets/certificados/edteam-cicd-circleci-jenkins.webp", "type": "imagen", "width": 1400, "height": 1061 },
+    { "title": "Fundamentos de AWS 2023", "issuer": "EDteam", "date": "2026-03-30", "hours": 7, "file": "assets/certificados/edteam-aws.webp", "preview": "assets/certificados/edteam-aws.webp", "type": "imagen", "width": 1400, "height": 1061 },
+    { "title": "React desde cero", "issuer": "EDteam", "date": "2025-09-04", "hours": 11, "file": "assets/certificados/edteam-react.webp", "preview": "assets/certificados/edteam-react.webp", "type": "imagen", "width": 1400, "height": 1061 },
+    { "title": "CI/CD con Gitlab", "issuer": "EDteam", "date": "2025-08-20", "hours": 3, "file": "assets/certificados/edteam-cicd-gitlab.webp", "preview": "assets/certificados/edteam-cicd-gitlab.webp", "type": "imagen", "width": 1400, "height": 1061 },
+    { "title": "Introducción a DevOps", "issuer": "EDteam", "date": "2025-08-19", "hours": 3, "file": "assets/certificados/edteam-intro-devops.webp", "preview": "assets/certificados/edteam-intro-devops.webp", "type": "imagen", "width": 1400, "height": 1061 }
+  ]
+}

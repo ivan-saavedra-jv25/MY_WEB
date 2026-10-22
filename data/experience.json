@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "icon": "i-layers",
+      "period": "sep. 2025 – actual",
+      "role": "Full-Stack Developer | Consultor de Software",
+      "company": "Profesionales Trebol IT Ltda",
+      "highlights": [
+        "Desarrollador y consultor externo en el sector bancario: levantamiento de requerimientos, definición funcional y validación de entregables con stakeholders.",
+        "Participación en el diseño y desarrollo de un LMS para un importante banco de Chile.",
+        "Coordinación técnica del equipo, asegurando calidad de código y estándares con SonarQube y buenas prácticas de backend.",
+        "Uso estratégico de LLMs en el flujo de desarrollo para optimizar tiempos de implementación."
+      ]
+    },
+    {
+      "icon": "i-code",
+      "period": "jun. 2023 – jul. 2025",
+      "role": "Full-Stack Developer",
+      "company": "Onecode Technology SpA",
+      "highlights": [
+        "Diseño y optimización de aplicaciones web internas con Laravel, React y Bootstrap.",
+        "Automatización de procesos críticos con Python y cron jobs.",
+        "Soluciones escalables en Laravel y Python, con buenas prácticas y estándares de mantenibilidad.",
+        "Plataforma de encuestas con reporting y scoring, y validación de cupones en tiempo real mediante APIs REST.",
+        "Integración y orquestación de servicios externos con NestJS y FastAPI."
+      ]
+    },
+    {
+      "icon": "i-gear",
+      "period": "sep. 2018 – jun. 2023",
+      "role": "Full-Stack Developer",
+      "company": "Appnet Technology",
+      "highlights": [
+        "Liderazgo del diseño e implementación de la arquitectura de un ERP en Laravel y MySQL.",
+        "Desarrollo y supervisión de soluciones en PHP y JavaScript para requerimientos complejos.",
+        "Gestión de equipos técnicos y coordinación con stakeholders con Scrum/Kanban."
+      ]
+    },
+    {
+      "icon": "i-tag",
+      "period": "mar. 2018 – ago. 2018",
+      "role": "Full Stack Developer y Soporte de Aplicaciones",
+      "company": "Softnet",
+      "highlights": [
+        "Soporte y mantenimiento de ERP, resolución de incidencias en producción y mejoras en PHP y JavaScript."
+      ]
+    }
+  ]
+}

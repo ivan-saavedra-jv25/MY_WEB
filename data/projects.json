@@ -1,0 +1,45 @@
+{
+  "featured": [
+    {
+      "tag": "Plataforma web · Banca",
+      "icon": "i-book",
+      "title": "Learning Management System (LMS)",
+      "description": "Diseño y desarrollo de un LMS para un importante banco de Chile, orientado a la gestión y seguimiento de procesos de capacitación y formación de usuarios.",
+      "meta": "Profesionales Trebol IT Ltda · 2025 – actual",
+      "tech": ["Calidad con SonarQube", "Backend"],
+      "link": { "href": "#experiencia", "label": "Ver experiencia" }
+    },
+    {
+      "tag": "Sistema empresarial",
+      "icon": "i-gear",
+      "title": "ERP en Laravel y MySQL",
+      "description": "Liderazgo del diseño e implementación de la arquitectura de un ERP, con buenas prácticas, estándares de calidad y lineamientos de escalabilidad y mantenibilidad.",
+      "meta": "Appnet Technology · 2018 – 2023",
+      "tech": ["Laravel", "MySQL", "PHP", "JavaScript"],
+      "link": { "href": "#experiencia", "label": "Ver experiencia" }
+    },
+    {
+      "tag": "Herramientas internas",
+      "icon": "i-chart",
+      "title": "Plataforma de encuestas y validación de cupones",
+      "description": "Plataforma de encuestas con reporting y scoring, y un sistema de validación de cupones en tiempo real mediante APIs REST.",
+      "meta": "Onecode Technology SpA · 2023 – 2025",
+      "tech": ["Laravel", "Python", "API REST"],
+      "link": { "href": "#experiencia", "label": "Ver experiencia" }
+    }
+  ],
+  "secondary": [
+    {
+      "tag": "Automatización",
+      "title": "Automatización de procesos críticos",
+      "description": "Automatización con Python y cron jobs, reduciendo la intervención manual y minimizando errores operativos.",
+      "tech": ["Python", "Cron Jobs"]
+    },
+    {
+      "tag": "Arquitectura",
+      "title": "Integración de servicios externos",
+      "description": "Integración y orquestación de servicios externos con NestJS y FastAPI, fortaleciendo la arquitectura y la extensibilidad del sistema.",
+      "tech": ["NestJS", "FastAPI"]
+    }
+  ]
+}

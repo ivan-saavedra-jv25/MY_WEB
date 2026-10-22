@@ -1,0 +1,10 @@
+{
+  "groups": [
+    { "title": "Lenguajes", "items": ["PHP", "Python", "Java", "JavaScript", "TypeScript"] },
+    { "title": "Arquitectura y backend", "items": ["Laravel", "Lumen", "NestJS", "FastAPI", "Flask", "Spring Boot"] },
+    { "title": "Frontend", "items": ["React", "Angular", "Bootstrap", "Blade", "jQuery"] },
+    { "title": "Bases de datos", "items": ["MySQL", "PostgreSQL", "SQLite"] },
+    { "title": "DevOps y automatización", "items": ["Docker", "GitHub Actions", "Jenkins", "Argo", "Cron Jobs", "Scripts en Python", "Git"] },
+    { "title": "Metodologías y gestión", "items": ["Scrum", "Kanban", "Jira", "GitHub"] }
+  ]
+}

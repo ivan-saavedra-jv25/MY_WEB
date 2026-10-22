@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "icon": "i-mail", "label": "Correo", "value": "ivanandres.hj@gmail.com", "href": "mailto:ivanandres.hj@gmail.com" },
+    { "icon": "i-phone", "label": "Teléfono", "value": "+56 9 3872 8797", "href": "tel:+56938728797" },
+    { "icon": "i-pin", "label": "Ubicación", "value": "Quilicura, Región Metropolitana" },
+    { "icon": "i-github", "label": "GitHub", "value": "ivan-saavedra-jv25", "href": "https://github.com/ivan-saavedra-jv25", "external": true }
+  ],
+  "social": [
+    { "icon": "i-github", "label": "GitHub", "href": "https://github.com/ivan-saavedra-jv25", "external": true },
+    { "icon": "i-mail", "label": "Enviar correo", "href": "mailto:ivanandres.hj@gmail.com" },
+    { "icon": "i-phone", "label": "Llamar por teléfono", "href": "tel:+56938728797" }
+  ]
+}
