@@ -2,7 +2,8 @@
   "items": [
     {
       "icon": "i-layers",
-      "period": "sep. 2025 – actual",
+      "start": "2025-09",
+      "end": null,
       "role": "Full-Stack Developer | Consultor de Software",
       "company": "Profesionales Trebol IT Ltda",
       "highlights": [
@@ -14,7 +15,8 @@
     },
     {
       "icon": "i-code",
-      "period": "jun. 2023 – jul. 2025",
+      "start": "2023-06",
+      "end": "2025-07",
       "role": "Full-Stack Developer",
       "company": "Onecode Technology SpA",
       "highlights": [
@@ -27,7 +29,8 @@
     },
     {
       "icon": "i-gear",
-      "period": "sep. 2018 – jun. 2023",
+      "start": "2018-09",
+      "end": "2023-06",
       "role": "Full-Stack Developer",
       "company": "Appnet Technology",
       "highlights": [
@@ -38,7 +41,8 @@
     },
     {
       "icon": "i-tag",
-      "period": "mar. 2018 – ago. 2018",
+      "start": "2018-03",
+      "end": "2018-08",
       "role": "Full Stack Developer y Soporte de Aplicaciones",
       "company": "Softnet",
       "highlights": [

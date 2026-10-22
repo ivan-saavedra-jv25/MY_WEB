@@ -64,12 +64,48 @@ function showDataError(error) {
     : 'No se pudo cargar parte del contenido. Recarga la página para reintentar.';
 }
 
+/* ---------- Estadísticas calculadas desde experience.json ---------- */
+
+const MONTHS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const stats = {};
+
+function parseMonth(value) {
+  const [year, month] = value.split('-').map(Number);
+  return { year, month };
+}
+
+function formatMonth(value) {
+  const { year, month } = parseMonth(value);
+  return `${MONTHS[month - 1]}. ${year}`;
+}
+
+function computeStats(jobs, now = new Date()) {
+  const starts = jobs.map((job) => parseMonth(job.start));
+  const first = starts.reduce((min, s) => (s.year * 12 + s.month < min.year * 12 + min.month ? s : min));
+  const months = (now.getFullYear() - first.year) * 12 + (now.getMonth() + 1 - first.month);
+  return {
+    years: Math.max(0, Math.floor(months / 12)),
+    companies: new Set(jobs.map((job) => job.company)).size,
+  };
+}
+
+function fill(text) {
+  return text.replace(/\{(\w+)\}/g, (match, key) => (key in stats ? stats[key] : match));
+}
+
+function applyStats() {
+  document.querySelectorAll('[data-stat]').forEach((node) => {
+    const value = stats[node.dataset.stat];
+    if (value !== undefined) node.textContent = value;
+  });
+}
+
 /* ---------- Render por área ---------- */
 
 function renderAbout(data) {
   mount('facts-list', ...data.facts.map((fact) => el('div', {},
     el('dt', {}, icon(fact.icon), ` ${fact.label}`),
-    el('dd', {}, fact.href ? el('a', { href: fact.href, text: fact.value }) : fact.value),
+    el('dd', {}, fact.href ? el('a', { href: fact.href, text: fact.value }) : fill(fact.value)),
   )));
 }
 
@@ -109,7 +145,7 @@ function renderExperience(data) {
   mount('experience-list', ...data.items.map((job) => el('li', {},
     el('span', { class: 'node', 'aria-hidden': 'true' }, icon(job.icon)),
     el('div', {},
-      el('p', { class: 'period', text: job.period }),
+      el('p', { class: 'period', text: `${formatMonth(job.start)} – ${job.end ? formatMonth(job.end) : 'actual'}` }),
       el('h3', { text: job.role }),
       el('p', { class: 'company', text: job.company }),
       el('ul', {}, ...job.highlights.map((text) => el('li', { text }))),
@@ -311,6 +347,13 @@ const CONTENT_SOURCES = [
 ];
 
 async function initContent() {
+  try {
+    Object.assign(stats, computeStats((await loadJson('experience')).items));
+    applyStats();
+  } catch (error) {
+    showDataError(error);
+  }
+
   const results = await Promise.allSettled(CONTENT_SOURCES.map(async ([name, render]) => {
     render(await loadJson(name));
   }));

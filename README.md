@@ -19,10 +19,12 @@ Cada área tiene su propio JSON; para cambiar un listado, edita solo ese archivo
 | `areas.json` | Áreas de trabajo |
 | `stack.json` | Stack tecnológico por grupos |
 | `projects.json` | Proyectos destacados y secundarios |
-| `experience.json` | Línea de tiempo de experiencia |
+| `experience.json` | Línea de tiempo (cada trabajo con `start` y `end` en formato `AAAA-MM`; `end: null` = actual). De aquí se **calculan** los años de experiencia y la cantidad de empresas |
 | `education.json` | Título y certificados (se ordenan por `date`; cada uno referencia su archivo de Google Drive con `driveId`) |
 | `contact.json` | Lista de contacto y enlaces del hero |
 | `repos.json` | Cuentas de GitHub, tamaño de página y exclusión de forks |
+
+Las cifras calculadas (años = meses desde el inicio más antiguo hasta hoy, en años completos; empresas = nombres distintos) se insertan donde el HTML tiene `data-stat="years"` o `data-stat="companies"`, y en los textos de los JSON con `{years}` / `{companies}`.
 
 Los iconos se indican por id del sprite en `index.html` (por ejemplo `i-mail`).
 

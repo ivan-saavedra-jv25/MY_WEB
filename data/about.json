@@ -3,6 +3,6 @@
     { "icon": "i-pin", "label": "Ubicación", "value": "Quilicura, Región Metropolitana" },
     { "icon": "i-mail", "label": "Correo", "value": "ivanandres.hj@gmail.com", "href": "mailto:ivanandres.hj@gmail.com" },
     { "icon": "i-user", "label": "Idiomas", "value": "Inglés: lectura técnica avanzada, conversación intermedia" },
-    { "icon": "i-clock", "label": "Experiencia", "value": "Más de 8 años" }
+    { "icon": "i-clock", "label": "Experiencia", "value": "Más de {years} años" }
   ]
 }
