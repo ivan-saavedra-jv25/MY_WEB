@@ -33,6 +33,7 @@ css/styles.css          Tokens (:root), componentes, responsive, reduced-motion
 js/main.js              Tema claro/oscuro, menú móvil, enlace activo, reveal, volver arriba
 assets/images/logo.svg  Logo / favicon
 assets/IvanSaavedra-CV.pdf  CV descargable
+assets/certificados/    Miniaturas de certificados (el original está en Drive)
 ```
 
 ## Personalizar
@@ -41,7 +42,7 @@ assets/IvanSaavedra-CV.pdf  CV descargable
 - Para actualizar el CV descargable, reemplaza `assets/IvanSaavedra-CV.pdf` manteniendo el nombre.
 
 ## Certificados en Google Drive
-Los certificados no están en el repo: el enlace abre `drive.google.com/file/d/<driveId>/view` y la miniatura usa `drive.google.com/thumbnail?id=<driveId>`. Los archivos deben estar compartidos como "cualquier persona con el enlace". Drive limita las miniaturas (error 429) si se piden muchas seguidas; en ese caso se muestra una tarjeta de respaldo con el enlace al certificado. Para agregar uno, copia el ID de su enlace de Drive a `education.json`.
+El certificado completo vive en Drive: cada tarjeta abre `drive.google.com/file/d/<driveId>/view` (el archivo debe estar compartido como "cualquier persona con el enlace"). La miniatura es una imagen pequeña local en `assets/certificados/<driveId>.webp`. Para agregar un certificado: copia el ID de su enlace de Drive a `data/education.json` y guarda su miniatura con ese nombre (se puede obtener de `https://drive.google.com/thumbnail?id=<driveId>&sz=w1000`; Drive limita las peticiones seguidas, así que descárgalas de una en una).
 
 ## Repositorios de GitHub
 La lista en Proyectos se carga en el navegador desde la API pública de GitHub (sin token, límite de 60 consultas/hora por IP; se guarda en caché de sesión 1 h). Las cuentas se definen en `data/repos.json`. Se excluyen los forks. Si la API falla, se muestra un mensaje con los perfiles enlazados. Las descripciones y lenguajes son los de GitHub: agregar una descripción al repo la mejora en el sitio.

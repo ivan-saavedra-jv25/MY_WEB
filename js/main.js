@@ -134,12 +134,11 @@ function renderEducation(data) {
   );
 
   const certificates = [...data.certificates].sort((a, b) => b.date.localeCompare(a.date));
-  mount('cert-grid', ...certificates.map((cert, index) => {
+  mount('cert-grid', ...certificates.map((cert) => {
     const date = formatDate(cert.date);
     const id = encodeURIComponent(cert.driveId);
-    const thumbUrl = `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
     const image = el('img', {
-      src: thumbUrl,
+      src: `assets/certificados/${id}.webp`,
       alt: `Certificado ${cert.issuer}: ${cert.title}, ${date}`,
       loading: 'lazy',
       width: cert.width,
@@ -153,14 +152,8 @@ function renderEducation(data) {
       'aria-label': `Abrir certificado ${cert.title} (${cert.type}, pestaña nueva)`,
     }, image);
 
-    // Drive limita las miniaturas (429): un reintento escalonado y, si falla, una tarjeta de respaldo.
-    let retried = false;
+    // Si falta la miniatura local, queda una tarjeta con el enlace a Drive.
     image.addEventListener('error', () => {
-      if (!retried) {
-        retried = true;
-        setTimeout(() => { image.src = `${thumbUrl}&retry=1`; }, 1500 + index * 700);
-        return;
-      }
       link.classList.add('cert-thumb-fallback');
       link.replaceChildren(el('span', { text: cert.issuer }), el('small', { text: 'Ver certificado' }));
     });
