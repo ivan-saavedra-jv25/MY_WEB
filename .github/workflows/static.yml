@@ -42,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/fetch-repos.mjs
       - name: Fetch Drive certificates
-        # Si falla, el sitio publica con los certificados de data/education.json
+        # Si falla, el sitio publica con los certificados de assets/certificados/certificados.json
         continue-on-error: true
         env:
           DRIVE_API_KEY: ${{ secrets.DRIVE_API_KEY }}

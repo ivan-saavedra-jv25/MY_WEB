@@ -86,8 +86,9 @@ async function main() {
   const folderId = /\/folders\/([\w-]+)/.exec(education.folder ?? '')?.[1];
   if (!folderId) throw new Error('data/education.json no tiene un enlace "folder" de Drive válido');
 
+  const base = JSON.parse(await readFile(new URL(`${THUMB_DIR}certificados.json`, root), 'utf8'));
   const files = await listFiles(folderId, apiKey);
-  const knownIds = new Set(education.certificates.map((cert) => cert.driveId));
+  const knownIds = new Set(base.map((cert) => cert.driveId));
   const certificates = await buildList(files, knownIds,
     (id) => downloadThumbnail(id, new URL(THUMB_DIR, root)));
 

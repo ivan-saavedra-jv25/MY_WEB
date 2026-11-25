@@ -159,6 +159,50 @@ function formatDate(iso) {
   });
 }
 
+async function loadCertificates() {
+  const response = await fetch('assets/certificados/certificados.json');
+  if (!response.ok) throw new Error(`No se pudo leer certificados.json (${response.status})`);
+  return response.json();
+}
+
+function renderCertificate(cert) {
+  const date = formatDate(cert.date);
+  const { thumb, view } = certificateLinks(cert);
+  const image = el('img', {
+    src: thumb,
+    alt: `Certificado ${cert.issuer}: ${cert.title}, ${date}`,
+    loading: 'lazy',
+    width: cert.width ?? 1000,
+    height: cert.height ?? 758,
+  });
+  const viewerProps = view && {
+    href: view,
+    target: '_blank',
+    rel: 'noopener',
+    'data-viewer': encodeURIComponent(cert.driveId),
+    'data-title': `${cert.title} · ${cert.issuer}`,
+  };
+  const frame = el(view ? 'a' : 'div', {
+    class: 'cert-thumb',
+    ...viewerProps,
+    'aria-label': view && `Ver certificado ${cert.title} (${cert.type})`,
+  }, image);
+
+  // Si no hay miniatura, queda una tarjeta con el nombre del emisor.
+  const showFallback = () => {
+    frame.classList.add('cert-thumb-fallback');
+    frame.replaceChildren(el('span', { text: cert.issuer }), view && el('small', { text: 'Ver certificado' }) || '');
+  };
+  if (thumb) image.addEventListener('error', showFallback);
+  else showFallback();
+
+  return el('li', { class: 'cert' },
+    frame,
+    el('h3', { text: cert.title }),
+    el('p', { text: [cert.issuer, date, cert.hours && `${cert.hours} h`].filter(Boolean).join(' · ') }),
+  );
+}
+
 async function renderEducation(data) {
   const { degree } = data;
   mount('degree',
@@ -169,43 +213,12 @@ async function renderEducation(data) {
     ),
   );
 
-  // Lista generada en el despliegue; si no existe (por ejemplo, en local) se usa solo education.json.
+  const base = await loadCertificates();
+  // Lista generada en el despliegue; si no existe (por ejemplo, en local) se usa solo la lista base.
   const generated = await fetch('data/certificates-list.json')
     .then((response) => (response.ok ? response.json() : null))
     .catch(() => null);
-  const certificates = mergeCertificates(data.certificates, generated);
-  mount('cert-grid', ...certificates.map((cert) => {
-    const date = formatDate(cert.date);
-    const id = encodeURIComponent(cert.driveId);
-    const image = el('img', {
-      src: cert.thumb || `assets/certificados/${id}.webp`,
-      alt: `Certificado ${cert.issuer}: ${cert.title}, ${date}`,
-      loading: 'lazy',
-      width: cert.width ?? 1000,
-      height: cert.height ?? 758,
-    });
-    const link = el('a', {
-      class: 'cert-thumb',
-      href: `https://drive.google.com/file/d/${id}/view`,
-      target: '_blank',
-      rel: 'noopener',
-      'data-viewer': id,
-      'data-title': `${cert.title} · ${cert.issuer}`,
-      'aria-label': `Ver certificado ${cert.title} (${cert.type})`,
-    }, image);
-
-    // Si falta la miniatura local, queda una tarjeta con el enlace a Drive.
-    image.addEventListener('error', () => {
-      link.classList.add('cert-thumb-fallback');
-      link.replaceChildren(el('span', { text: cert.issuer }), el('small', { text: 'Ver certificado' }));
-    });
-
-    return el('li', { class: 'cert' },
-      link,
-      el('h3', { text: cert.title }),
-      el('p', { text: [cert.issuer, date, cert.hours && `${cert.hours} h`].filter(Boolean).join(' · ') }),
-    );
-  }));
+  mount('cert-grid', ...mergeCertificates(base, generated).map(renderCertificate));
   if (data.folder) {
     document.getElementById('cert-folder')?.setAttribute('href', data.folder);
   }
