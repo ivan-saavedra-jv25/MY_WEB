@@ -159,7 +159,7 @@ function formatDate(iso) {
   });
 }
 
-function renderEducation(data) {
+async function renderEducation(data) {
   const { degree } = data;
   mount('degree',
     icon(degree.icon),
@@ -169,16 +169,20 @@ function renderEducation(data) {
     ),
   );
 
-  const certificates = [...data.certificates].sort((a, b) => b.date.localeCompare(a.date));
+  // Lista generada en el despliegue; si no existe (por ejemplo, en local) se usa solo education.json.
+  const generated = await fetch('data/certificates-list.json')
+    .then((response) => (response.ok ? response.json() : null))
+    .catch(() => null);
+  const certificates = mergeCertificates(data.certificates, generated);
   mount('cert-grid', ...certificates.map((cert) => {
     const date = formatDate(cert.date);
     const id = encodeURIComponent(cert.driveId);
     const image = el('img', {
-      src: `assets/certificados/${id}.webp`,
+      src: cert.thumb || `assets/certificados/${id}.webp`,
       alt: `Certificado ${cert.issuer}: ${cert.title}, ${date}`,
       loading: 'lazy',
-      width: cert.width,
-      height: cert.height,
+      width: cert.width ?? 1000,
+      height: cert.height ?? 758,
     });
     const link = el('a', {
       class: 'cert-thumb',
@@ -199,7 +203,7 @@ function renderEducation(data) {
     return el('li', { class: 'cert' },
       link,
       el('h3', { text: cert.title }),
-      el('p', { text: `${cert.issuer} · ${date} · ${cert.hours} h` }),
+      el('p', { text: [cert.issuer, date, cert.hours && `${cert.hours} h`].filter(Boolean).join(' · ') }),
     );
   }));
   if (data.folder) {
@@ -373,7 +377,7 @@ async function initContent() {
   }
 
   const results = await Promise.allSettled(CONTENT_SOURCES.map(async ([name, render]) => {
-    render(await loadJson(name));
+    await render(await loadJson(name));
   }));
   const failed = results.find((result) => result.status === 'rejected');
   if (failed) showDataError(failed.reason);
