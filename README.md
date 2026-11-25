@@ -38,14 +38,13 @@ tests/                   Pruebas (node --test)
 js/certificates.js      Ordena los certificados y arma sus enlaces
 js/main.js              Tema claro/oscuro, menú móvil, enlace activo, reveal, volver arriba
 assets/images/logo.svg  Logo / favicon
-assets/IvanSaavedra-CV.pdf  CV descargable
 assets/certificados/    certificados.json y miniaturas .webp (el PDF está en Drive)
 ```
 
 ## Personalizar
 - Colores, radios, espaciados y tipografía: variables en `:root` de `css/styles.css` (tema claro en `:root[data-theme="light"]`).
 - Contenido: editar las secciones en `index.html`. Todo el texto proviene del CV.
-- Para actualizar el CV descargable, reemplaza `assets/IvanSaavedra-CV.pdf` manteniendo el nombre.
+- El CV está en Canva (botón "Ver CV" del encabezado). Para cambiar el enlace, edita el `href` de `.cv-btn` en `index.html`.
 
 ## Certificados en Google Drive
 ### Agregar un certificado
