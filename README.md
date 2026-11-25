@@ -20,7 +20,7 @@ Cada área tiene su propio JSON; para cambiar un listado, edita solo ese archivo
 | `stack.json` | Stack tecnológico por grupos |
 | `projects.json` | Proyectos destacados y secundarios |
 | `experience.json` | Línea de tiempo (cada trabajo con `start` y `end` en formato `AAAA-MM`; `end: null` = actual). De aquí se **calculan** los años de experiencia y la cantidad de empresas |
-| `education.json` | Título y certificados (se ordenan por `date`; cada uno referencia su archivo de Google Drive con `driveId`) |
+| `education.json` | Título y certificados (se ordenan por `date`; cada uno referencia su archivo de Google Drive con `driveId`). Los certificados nuevos se toman solos de Drive |
 | `contact.json` | Lista de contacto y enlaces del hero |
 | `repos.json` | Cuentas de GitHub, tamaño de página y exclusión de forks |
 
@@ -33,7 +33,10 @@ Los iconos se indican por id del sprite en `index.html` (por ejemplo `i-mail`).
 index.html              Estructura y contenido
 css/styles.css          Tokens (:root), componentes, responsive, reduced-motion
 scripts/fetch-repos.mjs  Genera data/repos-list.json en el CI
+scripts/fetch-certificates.mjs  Genera data/certificates-list.json desde Drive en el CI
+tests/                   Pruebas (node --test)
 .github/workflows/      Despliegue a GitHub Pages
+js/certificates.js      Une los certificados locales con los de Drive
 js/main.js              Tema claro/oscuro, menú móvil, enlace activo, reveal, volver arriba
 assets/images/logo.svg  Logo / favicon
 assets/IvanSaavedra-CV.pdf  CV descargable
@@ -46,7 +49,22 @@ assets/certificados/    Miniaturas de certificados (el original está en Drive)
 - Para actualizar el CV descargable, reemplaza `assets/IvanSaavedra-CV.pdf` manteniendo el nombre.
 
 ## Certificados en Google Drive
-El certificado completo vive en Drive: al hacer clic se abre en un visor modal (iframe de `drive.google.com/file/d/<driveId>/preview`, cierra con Esc, la X o clic fuera) con un botón "Abrir en Drive"; Ctrl/Cmd+clic lo abre directo en Drive. El enlace es `drive.google.com/file/d/<driveId>/view` (el archivo debe estar compartido como "cualquier persona con el enlace"). La miniatura es una imagen pequeña local en `assets/certificados/<driveId>.webp`. Para agregar un certificado: copia el ID de su enlace de Drive a `data/education.json` y guarda su miniatura con ese nombre (se puede obtener de `https://drive.google.com/thumbnail?id=<driveId>&sz=w1000`; Drive limita las peticiones seguidas, así que descárgalas de una en una).
+Para publicar un certificado basta con subirlo (PDF o imagen) a la carpeta de Drive indicada en `folder` de `data/education.json`, compartida como "cualquier persona con el enlace", con este nombre:
+
+```
+Emisor - Título - AAAA-MM-DD - Nh.ext
+Platzi - Curso de Git y GitHub - 2026-09-28 - 24h.pdf
+```
+
+El separador es ` - ` (con espacios), el título puede contenerlo y las horas son opcionales. Los archivos que no cumplen el formato se omiten y quedan avisados en el log del workflow.
+
+- **Cuándo se publica:** en el siguiente despliegue (push a `main`, a diario a las 06:00 UTC, o a mano en la pestaña Actions con "Run workflow"). `scripts/fetch-certificates.mjs` descarga las miniaturas y genera `data/certificates-list.json` (ignorados por git). Si Drive falla, el sitio publica igual con los certificados de `education.json`.
+- **Prioridad:** un certificado listado en `data/education.json` (por `driveId`) usa esos datos y su miniatura `assets/certificados/<driveId>.webp`, sin importar su nombre en Drive. Borrarlo de Drive no lo quita del sitio: hay que quitar también su entrada.
+- **API key (una sola vez):** en [Google Cloud](https://console.cloud.google.com/) crea un proyecto, habilita **Google Drive API**, crea una API key en "Credenciales" y restríngela a esa API. Guárdala en GitHub en Settings, Secrets and variables, Actions, con el nombre `DRIVE_API_KEY`. No la escribas en ningún archivo del repositorio.
+- **Local:** `DRIVE_API_KEY=... node scripts/fetch-certificates.mjs`.
+- **Pruebas:** `node --test tests/*.test.mjs`.
+
+Al hacer clic, el certificado se abre en un visor modal (iframe de `drive.google.com/file/d/<driveId>/preview`, cierra con Esc, la X o clic fuera) con un botón "Abrir en Drive"; Ctrl/Cmd+clic lo abre directo en Drive.
 
 ## Repositorios de GitHub
 Las cuentas se definen en `data/repos.json` (también `excludeForks` y `pageSize`).

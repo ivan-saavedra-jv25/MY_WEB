@@ -41,6 +41,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/fetch-repos.mjs
+      - name: Fetch Drive certificates
+        # Si falla, el sitio publica con los certificados de data/education.json
+        continue-on-error: true
+        env:
+          DRIVE_API_KEY: ${{ secrets.DRIVE_API_KEY }}
+        run: node scripts/fetch-certificates.mjs
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
