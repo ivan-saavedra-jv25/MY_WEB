@@ -213,12 +213,8 @@ async function renderEducation(data) {
     ),
   );
 
-  const base = await loadCertificates();
-  // Lista generada en el despliegue; si no existe (por ejemplo, en local) se usa solo la lista base.
-  const generated = await fetch('data/certificates-list.json')
-    .then((response) => (response.ok ? response.json() : null))
-    .catch(() => null);
-  mount('cert-grid', ...mergeCertificates(base, generated).map(renderCertificate));
+  const certificates = await loadCertificates();
+  mount('cert-grid', ...sortCertificates(certificates).map(renderCertificate));
   if (data.folder) {
     document.getElementById('cert-folder')?.setAttribute('href', data.folder);
   }

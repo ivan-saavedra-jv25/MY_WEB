@@ -3,20 +3,10 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import '../js/certificates.js';
 
-const base = [{ driveId: 'a', title: 'base', issuer: 'X', date: '2026-01-01' }];
-
-test('une, prioriza education.json y ordena por fecha', () => {
-  const out = globalThis.mergeCertificates(base, { certificates: [
-    { driveId: 'a', title: 'otro', issuer: 'X', date: '2026-05-01' },
-    { driveId: 'b', title: 'nuevo', issuer: 'Y', date: '2026-03-01' },
-  ] });
-  assert.deepEqual(out.map((c) => c.title), ['nuevo', 'base']);
-});
-
-test('lista ausente o malformada deja la base', () => {
-  for (const bad of [null, undefined, {}, { certificates: 'x' }, { certificates: [null, { driveId: 'z' }] }]) {
-    assert.deepEqual(globalThis.mergeCertificates(base, bad), base);
-  }
+test('ordena por fecha, la más reciente primero, sin modificar la lista', () => {
+  const list = [{ date: '2026-01-01' }, { date: '2026-03-01' }];
+  assert.deepEqual(globalThis.sortCertificates(list).map((c) => c.date), ['2026-03-01', '2026-01-01']);
+  assert.equal(list[0].date, '2026-01-01');
 });
 
 test('enlaces: miniatura local codificada y ver', () => {
@@ -26,15 +16,10 @@ test('enlaces: miniatura local codificada y ver', () => {
   });
 });
 
-test('enlaces: miniatura generada tiene prioridad', () => {
-  assert.equal(globalThis.certificateLinks({ driveId: 'abc', thumb: 'assets/certificados/abc.jpg' }).thumb,
-    'assets/certificados/abc.jpg');
-});
-
-test('enlaces: sin driveId no hay ver; sin miniatura generada queda null', () => {
+test('enlaces: sin driveId no hay ver; sin miniatura queda null', () => {
   const links = globalThis.certificateLinks({ driveId: '', thumbnail: 'x.webp' });
   assert.equal(links.view, null);
-  assert.equal(globalThis.certificateLinks({ driveId: 'abc', thumb: null }).thumb, null);
+  assert.equal(globalThis.certificateLinks({ driveId: 'abc' }).thumb, null);
 });
 
 test('certificados.json: miniaturas existen y no hay duplicados', async () => {

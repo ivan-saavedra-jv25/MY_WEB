@@ -33,10 +33,9 @@ Los iconos se indican por id del sprite en `index.html` (por ejemplo `i-mail`).
 index.html              Estructura y contenido
 css/styles.css          Tokens (:root), componentes, responsive, reduced-motion
 scripts/fetch-repos.mjs  Genera data/repos-list.json en el CI
-scripts/fetch-certificates.mjs  Genera data/certificates-list.json desde Drive en el CI
 tests/                   Pruebas (node --test)
 .github/workflows/      Despliegue a GitHub Pages
-js/certificates.js      Une las listas de certificados y arma sus enlaces
+js/certificates.js      Ordena los certificados y arma sus enlaces
 js/main.js              Tema claro/oscuro, menú móvil, enlace activo, reveal, volver arriba
 assets/images/logo.svg  Logo / favicon
 assets/IvanSaavedra-CV.pdf  CV descargable
@@ -49,26 +48,12 @@ assets/certificados/    certificados.json y miniaturas .webp (el PDF está en Dr
 - Para actualizar el CV descargable, reemplaza `assets/IvanSaavedra-CV.pdf` manteniendo el nombre.
 
 ## Certificados en Google Drive
-### Agregar un certificado a mano (sin API key)
+### Agregar un certificado
 1. Sube el PDF a la carpeta de Drive y copia su ID desde el enlace.
 2. Guarda la miniatura en `assets/certificados/` en formato `.webp` (`cwebp -q 85 imagen.png -o imagen.webp`).
 3. Agrega la entrada en `assets/certificados/certificados.json` con `title`, `issuer`, `date`, `hours`, `type`, `thumbnail` (nombre del `.webp`) y `driveId`. Sin `driveId` se muestra solo la imagen, sin enlace.
 
-### Publicación automática desde Drive
-Para publicar un certificado basta con subirlo (PDF o imagen) a la carpeta de Drive indicada en `folder` de `data/education.json`, compartida como "cualquier persona con el enlace", con este nombre:
-
-```
-Emisor - Título - AAAA-MM-DD - Nh.ext
-Platzi - Curso de Git y GitHub - 2026-09-28 - 24h.pdf
-```
-
-El separador es ` - ` (con espacios), el título puede contenerlo y las horas son opcionales. Los archivos que no cumplen el formato se omiten y quedan avisados en el log del workflow.
-
-- **Cuándo se publica:** en el siguiente despliegue (push a `main`, a diario a las 06:00 UTC, o a mano en la pestaña Actions con "Run workflow"). `scripts/fetch-certificates.mjs` descarga las miniaturas y genera `data/certificates-list.json` (ignorados por git). Si Drive falla, el sitio publica igual con los certificados de `certificados.json`.
-- **Prioridad:** un certificado listado en `assets/certificados/certificados.json` (por `driveId`) usa esos datos y su miniatura, sin importar su nombre en Drive. Borrarlo de Drive no lo quita del sitio: hay que quitar también su entrada.
-- **API key (una sola vez):** en [Google Cloud](https://console.cloud.google.com/) crea un proyecto, habilita **Google Drive API**, crea una API key en "Credenciales" y restríngela a esa API. Guárdala en GitHub en Settings, Secrets and variables, Actions, con el nombre `DRIVE_API_KEY`. No la escribas en ningún archivo del repositorio.
-- **Local:** `DRIVE_API_KEY=... node scripts/fetch-certificates.mjs`.
-- **Pruebas:** `node --test tests/*.test.mjs`.
+Pruebas: `node --test tests/*.test.mjs`.
 
 Al hacer clic, el certificado se abre en un visor modal (iframe de `drive.google.com/file/d/<driveId>/preview`, cierra con Esc, la X o clic fuera) con un botón "Abrir en Drive"; Ctrl/Cmd+clic lo abre directo en Drive.
 

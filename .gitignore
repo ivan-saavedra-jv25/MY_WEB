@@ -4,6 +4,3 @@ Thumbs.db
 .DS_Store
 *.log
 data/repos-list.json
-data/certificates-list.json
-assets/certificados/*.jpg
-assets/certificados/*.png
