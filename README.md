@@ -1,6 +1,6 @@
 # Portafolio de Iván Saavedra
 
-Sitio estático (HTML5, CSS3 y JavaScript vanilla). Sin frameworks, sin build, sin dependencias remotas.
+Sitio estático (HTML5, CSS3 y JavaScript vanilla). Sin frameworks ni build. La única dependencia remota es Google Tag Manager (`GTM-MP4WDPLJ`, en el `<head>` de `index.html`), usado para analítica.
 
 ## Ejecutar
 El contenido se lee desde archivos JSON con `fetch`, por lo que **no funciona abriendo `index.html` con doble clic** (el navegador bloquea `file://`). Sirve la carpeta con cualquier servidor estático:
